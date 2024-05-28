@@ -1,4 +1,4 @@
-#<!-- ENd-TO-END-ML-PROJECT-IMPLEMENTATION -->
+# ENd-TO-END-ML-PROJECT-IMPLEMENTATION 
 1.Github repo setup
 2.project template creation
 3.project setup
