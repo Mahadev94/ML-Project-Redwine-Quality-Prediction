@@ -19,11 +19,18 @@
     12.user app implementation
 
 ## Teck stack for project:
-1.pandas lib
-2.sk-learn lib
-3.matplotlib/seaborn library
-4.pyyaml library
-5.flask
-6.AWS
-7.docker
-8.Github Actions
+    1.pandas lib
+    2.sk-learn lib
+    3.matplotlib/seaborn library
+    4.pyyaml library
+    5.flask
+    6.AWS
+    7.docker
+    8.Github Actions
+## venv:
+    conda create -n venv13 python=3.8 -y
+    conda activate venv13
+
+    # requiremnts installation:
+    pip install -r requirements.txt
+    
