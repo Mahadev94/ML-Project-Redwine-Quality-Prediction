@@ -1,9 +1,11 @@
 import os
 from mlProject.logging import logger
 from mlProject.config.configuration import ConfigurationManager
-from mlProject.entity.config_entity import DataIngestionConfig,DataValidationConfig
+from mlProject.entity.config_entity import DataIngestionConfig,DataValidationConfig,DataTransformationConfig
 from mlProject.components.data_ingestion import DataIngestion
 from mlProject.components.data_validation import DataValidation
+from mlProject.components.data_transformation import DataTransformation
+from pathlib import Path
 
 
 class TrainingPipeline:
@@ -32,6 +34,20 @@ class TrainingPipeline:
         except Exception as e:
             raise e
 
+    def start_data_transformation(self) -> DataTransformationConfig:
+        try:
+            with open(Path("artifacts/data_validation/status.txt"), "r") as f:
+                status = f.read().split(" ")[3]
+                
+            if status == "True":
+                config = ConfigurationManager()
+                data_transformation_config = config.get_data_transformation_config()
+                data_transformation = DataTransformation(config = data_transformation_config)
+                data_transformation.train_test_split()
+            else:
+                raise Exception("data schema is not valid")
+        except Exception as e:
+            raise e
         
 if __name__ == '__main__':
     try:
@@ -44,6 +60,11 @@ if __name__ == '__main__':
         STAGE_NAME = "Data Validation stage"
         logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
         training_pipeline.start_data_validation()
+        logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+
+        STAGE_NAME = "Data Transformation stage"
+        logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
+        training_pipeline.start_data_transformation()
         logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
 
     except Exception as e:

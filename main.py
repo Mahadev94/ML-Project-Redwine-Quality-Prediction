@@ -15,6 +15,11 @@ if __name__ == '__main__':
         training_pipeline.start_data_validation()
         logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
 
+        STAGE_NAME = "Data Transformation stage"
+        logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
+        training_pipeline.start_data_transformation()
+        logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+
     except Exception as e:
         logger.exception(e)
         raise e
