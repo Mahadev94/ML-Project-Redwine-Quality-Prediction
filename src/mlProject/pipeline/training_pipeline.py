@@ -1,11 +1,12 @@
 import os
 from mlProject.logging import logger
 from mlProject.config.configuration import ConfigurationManager
-from mlProject.entity.config_entity import DataIngestionConfig,DataValidationConfig,DataTransformationConfig
+from mlProject.entity.config_entity import DataIngestionConfig,DataValidationConfig,DataTransformationConfig,ModelTrainerConfig
 from mlProject.components.data_ingestion import DataIngestion
 from mlProject.components.data_validation import DataValidation
 from mlProject.components.data_transformation import DataTransformation
 from pathlib import Path
+from mlProject.components.model_trainer import ModelTrainer
 
 
 class TrainingPipeline:
@@ -49,6 +50,17 @@ class TrainingPipeline:
         except Exception as e:
             raise e
         
+
+    def start_model_trainer(self) ->ModelTrainerConfig:
+        try:
+            config = ConfigurationManager()
+            model_trainer_config =config.get_model_trainer_config()
+            start_model_trainer =ModelTrainer(config = model_trainer_config)
+            start_model_trainer.train_model()
+        except Exception as e:
+            raise e
+
+        
 if __name__ == '__main__':
     try:
         STAGE_NAME = "Data Ingestion stage"
@@ -65,6 +77,11 @@ if __name__ == '__main__':
         STAGE_NAME = "Data Transformation stage"
         logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
         training_pipeline.start_data_transformation()
+        logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+
+        STAGE_NAME = "Model trainer Stage"
+        logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
+        training_pipeline.start_model_trainer()
         logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
 
     except Exception as e:

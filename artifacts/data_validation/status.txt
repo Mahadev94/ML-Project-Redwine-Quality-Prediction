@@ -1,2 +1,1 @@
-validation status is True
-column validation as per schema:{'fixed acidity': True, 'volatile acidity': True, 'citric acid': True, 'residual sugar': True, 'chlorides': True, 'free sulfur dioxide': True, 'total sulfur dioxide': True, 'density': True, 'pH': True, 'sulphates': True, 'alcohol': True, 'quality': True, 'Id': True}
+validation status is True column validation as per schema:{'fixed acidity': True, 'volatile acidity': True, 'citric acid': True, 'residual sugar': True, 'chlorides': True, 'free sulfur dioxide': True, 'total sulfur dioxide': True, 'density': True, 'pH': True, 'sulphates': True, 'alcohol': True, 'quality': True, 'Id': True} 
