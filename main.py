@@ -25,6 +25,11 @@ if __name__ == '__main__':
         training_pipeline.start_model_trainer()
         logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
 
+        STAGE_NAME = "Model Evaluation Stage"
+        logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<") 
+        training_pipeline.start_model_evaluation()
+        logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x") 
+
     except Exception as e:
         logger.exception(e)
         raise e

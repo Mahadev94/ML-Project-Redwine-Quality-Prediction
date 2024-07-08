@@ -3,7 +3,8 @@ from mlProject.utils.common import read_yaml,create_directories
 from mlProject.entity.config_entity import (DataIngestionConfig,
                                             DataValidationConfig,
                                             DataTransformationConfig,
-                                            ModelTrainerConfig)
+                                            ModelTrainerConfig,
+                                            ModelEvaluationConfig)
 
 class ConfigurationManager:
     def __init__(
@@ -75,3 +76,16 @@ class ConfigurationManager:
         )
         return model_trainer_config
         
+    def get_model_evaluation_config(self) -> ModelEvaluationConfig:
+        config = self.config.model_evaluation
+        schema = self.schema.TARGET_COLUMN
+
+        create_directories([config.root_dir])
+        module_evaluation_config = ModelEvaluationConfig(
+            root_dir = config.root_dir,
+            test_data_path = config.test_data_path,
+            model_path= config.model_path,
+            metrics_file_name= config.metrics_file_name,
+            target_column= schema.name
+        )
+        return module_evaluation_config
